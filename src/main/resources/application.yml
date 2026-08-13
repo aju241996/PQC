@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: pqc-auth-spring-boot
+
+# PQC token authentication settings.
+# Algorithm choices map directly onto the benchmarked schemes in
+# "The Energy Cost of Post-Quantum Transition: Benchmarking PQC Algorithms on
+# Commodity Hardware" (Jindal, Judd & Uludag, HPDC '26):
+#   ML_DSA_44 / ML_DSA_65 / ML_DSA_87   -> lattice-based, paper's recommended default (Table 9)
+#   FALCON_512 / FALCON_1024            -> lattice-based, compact sigs / fast verify, expensive keygen
+#   SPHINCS_PLUS_SHA2_128F / _256F      -> hash-based, conservative assumptions, large/slow signatures
+pqc:
+  algorithm: ML_DSA_87
+  token-ttl-seconds: 900
+  issuer: pqc-auth-demo
+  key-id: pqc-auth-key-1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    com.example.pqcauth: INFO
