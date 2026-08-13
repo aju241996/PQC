@@ -7,7 +7,7 @@ import com.example.pqcauth.dto.LoginRequest;
 import com.example.pqcauth.dto.RegisterRequest;
 import com.example.pqcauth.dto.TokenResponse;
 import com.example.pqcauth.model.AppUser;
-import com.example.pqcauth.store.InMemoryUserStore;
+import com.example.pqcauth.store.JpaUserStore;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +27,13 @@ import java.util.List;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final InMemoryUserStore userStore;
+    private final JpaUserStore userStore;
     private final PasswordEncoder passwordEncoder;
     private final PqcTokenService tokenService;
     private final PqcServerKeyPair serverKeyPair;
     private final PqcProperties properties;
 
-    public AuthController(InMemoryUserStore userStore, PasswordEncoder passwordEncoder,
+    public AuthController(JpaUserStore userStore, PasswordEncoder passwordEncoder,
                            PqcTokenService tokenService, PqcServerKeyPair serverKeyPair,
                            PqcProperties properties) {
         this.userStore = userStore;

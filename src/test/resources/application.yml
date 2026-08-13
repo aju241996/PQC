@@ -1,0 +1,34 @@
+# Test-only override of src/main/resources/application.yml: PostgreSQL-mode
+# H2, in-memory, so the suite runs without a live Postgres instance or Docker.
+# Production/local-dev config (real Postgres) lives in src/main/resources.
+server:
+  port: 8080
+
+spring:
+  application:
+    name: pqc-auth-spring-boot
+  datasource:
+    url: jdbc:h2:mem:pqcauth-test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create-drop
+
+pqc:
+  algorithm: ML_DSA_87
+  token-ttl-seconds: 900
+  issuer: pqc-auth-demo
+  key-id: pqc-auth-key-1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    com.example.pqcauth: INFO

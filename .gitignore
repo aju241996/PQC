@@ -5,3 +5,7 @@ target/
 *.iml
 .vscode/
 HELP.md
+.classpath
+.project
+.settings/
+.DS_Store

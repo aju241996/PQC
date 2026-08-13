@@ -4,6 +4,20 @@ server:
 spring:
   application:
     name: pqc-auth-spring-boot
+  # Postgres (e.g. RDS in AWS). Override via env vars in every real deployment;
+  # the jdbc:postgresql://localhost defaults only support local dev.
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/pqcauth}
+    username: ${SPRING_DATASOURCE_USERNAME:pqcauth}
+    password: ${SPRING_DATASOURCE_PASSWORD:pqcauth}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      # Demo-appropriate: auto-creates/updates app_users, app_user_roles,
+      # pqc_signing_keys from the entities. A managed deployment should
+      # switch to a migration tool (Flyway/Liquibase) and set this to "validate".
+      ddl-auto: update
 
 # PQC token authentication settings.
 # Algorithm choices map directly onto the benchmarked schemes in
