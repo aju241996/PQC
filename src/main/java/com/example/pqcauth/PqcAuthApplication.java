@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import java.security.Security;
+import java.util.Collections;
 
 /**
  * Spring Boot application demonstrating post-quantum-cryptography (PQC) based
@@ -39,6 +40,9 @@ public class PqcAuthApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(PqcAuthApplication.class, args);
+        SpringApplication app = new SpringApplication(PqcAuthApplication.class);
+        // Explicit manual port, independent of application.yml's server.port.
+        app.setDefaultProperties(Collections.singletonMap("server.port", "8080"));
+        app.run(args);
     }
 }

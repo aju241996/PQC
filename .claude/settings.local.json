@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Applications/IntelliJ IDEA CE.app/**)",
+      "Bash('/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/bin/mvn' -v)",
+      "Bash('/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/bin/mvn' -q dependency:go-offline)",
+      "Bash(mkdir -p ~/.local/bin)",
+      "Bash(ln -sf \"/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/bin/mvn\" ~/.local/bin/mvn)",
+      "Bash(chmod +x ~/.local/bin/mvn)",
+      "Bash(mvn compile *)",
+      "Bash(gh auth *)",
+      "Bash(gh repo *)",
+      "Bash(git ls-remote *)",
+      "Bash(git push *)"
+    ]
+  }
+}
